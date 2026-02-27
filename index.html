@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+    .message {
+        color: #000000;
+    }
+    .user-message {
+        color: #ffffff;
+    }
+    .ai-message {
+        color: #000000;
+    }
+    
+    select, select option {
+        color: #000000;
+        background-color: #ffffff;
+    }
+    
+    select option {
+        background-color: #ffffff;
+        color: #000000;
+    }
+</style>
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">🤖</span>
+                <span>AI Chat</span>
+            </div>
+
+            <div class="api-section">
+                <div class="input-group">
+                    <div class="section-title">
+                        <span class="selector-icon">🌐</span>
+                        Выбери провайдера
+                    </div>
+                    <select class="model-select" id="providerSelect" onchange="selectProvider()">
+                        <option value="openai">OpenAI (platform.openai.com)</option>
+                        <option value="openrouter">OpenRouter (openrouter.ai)</option>
+                        <option value="google">Google AI (makersuite.google.com)</option>
+                        <option value="anthropic">Anthropic (console.anthropic.com)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <div class="section-title">
+                        <span class="selector-icon">🔑</span>
+                        API Ключ
+                    </div>
+                    <input type="password" class="key-input" id="apiKey" placeholder="Вставь свой API ключ" autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <div class="section-title">
+                        <span class="selector-icon">🤖</span>
+                        Модель
+                    </div>
+                    <select class="model-select" id="modelSelect">
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                        <option value="gpt-4">GPT-4</option>
+                        <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                    </select>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="tokenCount">0</div>
+                        <div class="stat-label">Токены</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="messageCount">1</div>
+                        <div class="stat-label">Сообщения</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    📍 <strong>Вставь свой ключ</strong><br>
+                    🔗 Получи ключ на выбранном сайте<br>
+                    ⚡ Выбери модель из списка<br>
+                    💬 Начни общение
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-title">💬 AI Чат</div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span id="statusText">Готов</span>
+                </div>
+            </div>
+
+            <div class="messages" id="messages">
+<div class="message ai-message" style="color: #000000;">
+    <div class="message-avatar ai-avatar">🤖</div>
+    Привет! Вставь API ключ в поле слева и выбери провайдера. Затем выбери модель и начни общение!
+</div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea class="message-input" id="userInput" placeholder="Введи сообщение..." rows="1"></textarea>
+                    <button class="send-button" id="sendButton" onclick="sendMessage()">
+                        <span>Отправить</span>
+                        <span>🚀</span>
+                    </button>
+                </div>
+                <div class="info-box">
+                    💡 Нажми Enter для отправки
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
