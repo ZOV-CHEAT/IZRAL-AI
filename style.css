@@ -1,0 +1,516 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  height: calc(100vh - 40px);
+}
+
+.sidebar {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(0, 56, 184, 0.5);
+}
+
+.logo-icon {
+  font-size: 32px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: contain;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.api-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.section-title {
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 8px rgba(0, 56, 184, 0.5);
+}
+
+.ai-selector {
+  margin-bottom: 20px;
+}
+
+.ai-option {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.ai-option:hover {
+  background: linear-gradient(rgba(0, 56, 184, 0.4), rgba(0, 56, 184, 0.4)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  transform: translateY(-2px);
+  border-color: #fff;
+}
+
+.ai-option.active {
+  background: linear-gradient(rgba(0, 56, 184, 0.6), rgba(0, 56, 184, 0.6)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 56, 184, 0.3);
+}
+
+.ai-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.ai-description {
+  font-size: 12px;
+  color: #ddd;
+}
+
+.key-input {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.key-input:focus {
+  outline: none;
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 56, 184, 0.3);
+}
+
+.model-select {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px rgba(0, 56, 184, 0.5);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #ddd;
+}
+
+.info-box {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.chat-header {
+  background: linear-gradient(rgba(0, 56, 184, 0.3), rgba(0, 56, 184, 0.3)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 56, 184, 0.5);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 10px #fff;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.messages {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 18px;
+  border-radius: 18px;
+  position: relative;
+  line-height: 1.5;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-message {
+  background: linear-gradient(135deg, #0038b8, #002a88);
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 56, 184, 0.2);
+}
+
+.ai-message {
+  background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  color: #fff;
+}
+
+.message-avatar {
+  position: absolute;
+  top: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover;
+  border: 2px solid #fff;
+}
+
+.user-avatar {
+  right: -15px;
+}
+
+.ai-avatar {
+  left: -15px;
+}
+
+.code-block {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  font-family: 'Consolas', 'Monaco', monospace;
+  overflow-x: auto;
+  position: relative;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.code-language {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.copy-btn:hover {
+  background: rgba(0, 56, 184, 0.5);
+}
+
+.code-block pre {
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+.code-block code {
+  display: block;
+  color: #fff;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.inline-code {
+  background: rgba(0, 56, 184, 0.3);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.typing-indicator {
+  align-self: flex-start;
+  padding: 18px;
+  background: linear-gradient(rgba(0, 56, 184, 0.3), rgba(0, 56, 184, 0.3)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 5px;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite;
+  box-shadow: 0 0 8px #fff;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+.input-area {
+  padding: 25px;
+  background: linear-gradient(rgba(0, 56, 184, 0.2), rgba(0, 56, 184, 0.2)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.message-input {
+  flex: 1;
+  padding: 16px 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Israel_%281948%29.svg') no-repeat center center;
+  background-size: cover, cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: #fff;
+  font-size: 16px;
+  resize: none;
+  min-height: 60px;
+  max-height: 120px;
+  transition: all 0.3s;
+}
+
+.message-input:focus {
+  outline: none;
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 56, 184, 0.2);
+}
+
+.send-button {
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #0038b8, #002a88);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: center;
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 56, 184, 0.3);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 56, 184, 0.5);
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .sidebar {
+    order: 2;
+  }
+  
+  .chat-container {
+    order: 1;
+    height: 70vh;
+  }
+}
