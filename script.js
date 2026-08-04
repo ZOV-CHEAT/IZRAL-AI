@@ -36,7 +36,7 @@ const PROVIDERS = {
         {id: 'deepseek/deepseek-chat', name: 'DeepSeek Chat'},
         {id: 'deepseek/deepseek-v4-pro', name: 'DeepSeek V4 Pro'},
         {id: 'deepseek/deepseek-v4-flash', name: 'DeepSeek V4 Flash'},
-        {id: 'deepseek/deepseek-r1', name: 'DeepSeek r1 reasoning},
+        {id: 'deepseek/deepseek-r1', name: 'DeepSeek r1 reasoning'},
         {id: 'qwen/qwen-2.5-72b-instruct', name: 'Qwen 2.5 72B'},
         {id: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free', name: 'Nemotron 3 nano omni reasoning'}
     ],
