@@ -25,20 +25,22 @@ const PROVIDERS = {
         keySite: 'https://platform.openai.com'
     },
     openrouter: {
-        name: 'OpenRouter',
-        url: 'https://openrouter.ai/api/v1/chat/completions',
-        models: [
-            {id: 'openai/gpt-3.5-turbo', name: 'GPT-3.5 Turbo'},
-            {id: 'openai/gpt-4', name: 'GPT-4'},
-            {id: 'meta-llama/llama-3.1-70b-instruct', name: 'Llama 3.1 70B'},
-            {id: 'google/gemini-pro', name: 'Gemini Pro'},
-            {id: 'anthropic/claude-2', name: 'Claude 2'},
-            {id: 'deepseek/deepseek-chat', name: 'DeepSeek Chat'},
-            {id: 'deepseek/deepseek-coder', name: 'DeepSeek Coder'},
-            {id: 'qwen/qwen-2.5-72b-instruct', name: 'Qwen 2.5 72B'},
-            {id: 'nvidia/nemotron-4-340b-instruct', name: 'Nemotron 4 340B'}
-        ],
-        keySite: 'https://openrouter.ai'
+    name: 'OpenRouter',
+    url: 'https://openrouter.ai/api/v1/chat/completions',
+    models: [
+        {id: 'openai/gpt-3.5-turbo', name: 'GPT-3.5 Turbo'},
+        {id: 'openai/gpt-4', name: 'GPT-4'},
+        {id: 'meta-llama/llama-3.1-70b-instruct', name: 'Llama 3.1 70B'},
+        {id: 'google/gemini-pro', name: 'Gemini Pro'},
+        {id: 'anthropic/claude-2', name: 'Claude 2'},
+        {id: 'deepseek/deepseek-chat', name: 'DeepSeek Chat'},
+        {id: 'deepseek/deepseek-v4-pro', name: 'DeepSeek V4 Pro'},
+        {id: 'deepseek/deepseek-v4-flash', name: 'DeepSeek V4 Flash'},
+        {id: 'deepseek/deepseek-r1', name: 'DeepSeek r1 reasoning},
+        {id: 'qwen/qwen-2.5-72b-instruct', name: 'Qwen 2.5 72B'},
+        {id: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free', name: 'Nemotron 3 nano omni reasoning'}
+    ],
+    keySite: 'https://openrouter.ai'
     },
     google: {
         name: 'Google AI',
@@ -61,8 +63,8 @@ const PROVIDERS = {
         name: 'DeepSeek',
         url: 'https://api.deepseek.com/v1/chat/completions',
         models: [
-            {id: 'deepseek-chat', name: 'DeepSeek Chat'},
-            {id: 'deepseek-coder', name: 'DeepSeek Coder'}
+        {id: 'deepseek-chat', name: 'DeepSeek Chat (V3/V4)'},
+        {id: 'deepseek-reasoning', name: 'DeepSeek Reasoning (R1)'}
         ],
         keySite: 'https://platform.deepseek.com'
     },
