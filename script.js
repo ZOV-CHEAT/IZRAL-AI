@@ -7,6 +7,7 @@ const modelSelect = document.getElementById('modelSelect');
 const tokenCount = document.getElementById('tokenCount');
 const messageCount = document.getElementById('messageCount');
 const statusText = document.getElementById('statusText');
+const customModelInput = document.getElementById('customModel');
 
 let totalTokens = 0;
 let messageCounter = 1;
@@ -31,7 +32,11 @@ const PROVIDERS = {
             {id: 'openai/gpt-4', name: 'GPT-4'},
             {id: 'meta-llama/llama-3.1-70b-instruct', name: 'Llama 3.1 70B'},
             {id: 'google/gemini-pro', name: 'Gemini Pro'},
-            {id: 'anthropic/claude-2', name: 'Claude 2'}
+            {id: 'anthropic/claude-2', name: 'Claude 2'},
+            {id: 'deepseek/deepseek-chat', name: 'DeepSeek Chat'},
+            {id: 'deepseek/deepseek-coder', name: 'DeepSeek Coder'},
+            {id: 'qwen/qwen-2.5-72b-instruct', name: 'Qwen 2.5 72B'},
+            {id: 'nvidia/nemotron-4-340b-instruct', name: 'Nemotron 4 340B'}
         ],
         keySite: 'https://openrouter.ai'
     },
@@ -51,6 +56,34 @@ const PROVIDERS = {
             {id: 'claude-3-sonnet-20240229', name: 'Claude 3 Sonnet'}
         ],
         keySite: 'https://console.anthropic.com'
+    },
+    deepseek: {
+        name: 'DeepSeek',
+        url: 'https://api.deepseek.com/v1/chat/completions',
+        models: [
+            {id: 'deepseek-chat', name: 'DeepSeek Chat'},
+            {id: 'deepseek-coder', name: 'DeepSeek Coder'}
+        ],
+        keySite: 'https://platform.deepseek.com'
+    },
+    qwen: {
+        name: 'Qwen (Aliyun)',
+        url: 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
+        models: [
+            {id: 'qwen-turbo', name: 'Qwen Turbo'},
+            {id: 'qwen-plus', name: 'Qwen Plus'},
+            {id: 'qwen-max', name: 'Qwen Max'}
+        ],
+        keySite: 'https://dashscope.console.aliyun.com'
+    },
+    nemotron: {
+        name: 'Nemotron (NVIDIA)',
+        url: 'https://integrate.api.nvidia.com/v1/chat/completions',
+        models: [
+            {id: 'nvidia/nemotron-3-8b-instruct', name: 'Nemotron 3 8B'},
+            {id: 'nvidia/nemotron-4-340b-instruct', name: 'Nemotron 4 340B'}
+        ],
+        keySite: 'https://build.nvidia.com'
     }
 };
 
@@ -58,14 +91,31 @@ function selectProvider() {
     currentProvider = providerSelect.value;
     statusText.textContent = `Готов (${PROVIDERS[currentProvider].name})`;
     updateModels();
+    customModelInput.style.display = 'none';
+    customModelInput.value = '';
 }
 
 function updateModels() {
     const provider = PROVIDERS[currentProvider];
-    modelSelect.innerHTML = provider.models.map(model => 
+    const models = [
+        ...provider.models,
+        {id: 'custom', name: '✏️ Своя модель...'}
+    ];
+    
+    modelSelect.innerHTML = models.map(model => 
         `<option value="${model.id}">${model.name}</option>`
     ).join('');
 }
+
+modelSelect.addEventListener('change', function() {
+    if (this.value === 'custom') {
+        customModelInput.style.display = 'block';
+        customModelInput.focus();
+    } else {
+        customModelInput.style.display = 'none';
+        customModelInput.value = '';
+    }
+});
 
 function addMessage(text, isUser = false) {
     const messageDiv = document.createElement('div');
@@ -163,10 +213,20 @@ function hideTyping() {
     if (typing) typing.remove();
 }
 
+function getModel() {
+    const selected = modelSelect.value;
+    if (selected === 'custom') {
+        const custom = customModelInput.value.trim();
+        if (!custom) throw new Error('Введите название модели');
+        return custom;
+    }
+    return selected;
+}
+
 async function callAPI(prompt) {
     const apiKey = apiKeyInput.value.trim();
     const provider = PROVIDERS[currentProvider];
-    const model = modelSelect.value;
+    let model = getModel();
     
     if (!apiKey) throw new Error('Вставь API ключ');
     
@@ -187,7 +247,7 @@ async function callAPI(prompt) {
             max_tokens: 2000
         };
     }
-    else if (currentProvider === 'openai') {
+    else if (currentProvider === 'openai' || currentProvider === 'deepseek' || currentProvider === 'nemotron') {
         headers['Authorization'] = `Bearer ${apiKey}`;
         body = {
             model: model,
@@ -211,6 +271,18 @@ async function callAPI(prompt) {
             messages: [{ role: 'user', content: prompt }]
         };
     }
+    else if (currentProvider === 'qwen') {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+        body = {
+            model: model,
+            input: {
+                messages: [{ role: 'user', content: prompt }]
+            },
+            parameters: {
+                result_format: 'message'
+            }
+        };
+    }
     
     const response = await fetch(url, {
         method: 'POST',
@@ -227,7 +299,8 @@ async function callAPI(prompt) {
     
     const data = await response.json();
     
-    if (currentProvider === 'openrouter' || currentProvider === 'openai') {
+    if (currentProvider === 'openrouter' || currentProvider === 'openai' || 
+        currentProvider === 'deepseek' || currentProvider === 'nemotron') {
         totalTokens += data.usage?.total_tokens || 0;
         tokenCount.textContent = totalTokens;
         return data.choices[0].message.content;
@@ -237,6 +310,9 @@ async function callAPI(prompt) {
     }
     else if (currentProvider === 'anthropic') {
         return data.content[0].text;
+    }
+    else if (currentProvider === 'qwen') {
+        return data.output.choices[0].message.content;
     }
     
     return 'Ошибка: неизвестный формат ответа';
